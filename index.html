@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumière &amp; Lace — Handcrafted Jewelry</title>
+  <meta name="description" content="Lumière &amp; Lace crafts exquisite handmade necklaces and bracelets for those who believe in the beauty of slow, intentional adornment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">Lumière <span>&amp;</span> Lace</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#features">Our Promise</a></li>
+        <li><a href="#testimonials">Stories</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Floating Cart -->
+  <button class="cart-float" id="cartBtn" aria-label="Shopping cart">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <!-- Cart Sidebar -->
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Your Basket</h3>
+      <button class="cart-close" id="cartClose" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Your basket is empty ✨</p>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total">Total: <span id="cartTotal">$0.00</span></div>
+      <button class="btn btn-primary cart-checkout">Checkout</button>
+    </div>
+  </aside>
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <canvas class="sparkle-canvas" id="sparkleCanvas"></canvas>
+    <div class="hero-content">
+      <p class="hero-sub">✦ Handcrafted with love ✦</p>
+      <h1 class="hero-title">Crafted with love,<br /><em>worn with grace.</em></h1>
+      <p class="hero-desc">Each piece tells a story — woven from moonlight, pearls, and quiet devotion. Adorn yourself in something extraordinary.</p>
+      <div class="hero-actions">
+        <a href="#collections" class="btn btn-primary" id="heroShopBtn">Shop Now</a>
+        <a href="#features" class="btn btn-ghost">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Floral Divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 Q150,0 300,30 Q450,60 600,30 Q750,0 900,30 Q1050,60 1200,30" fill="none" stroke="#FFADC5" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <circle cx="600" cy="30" r="6" fill="#FFADC5"/>
+      <circle cx="300" cy="30" r="4" fill="#E8A0B4"/>
+      <circle cx="900" cy="30" r="4" fill="#E8A0B4"/>
+      <circle cx="150" cy="15" r="3" fill="#FFD6E0"/>
+      <circle cx="450" cy="45" r="3" fill="#FFD6E0"/>
+      <circle cx="750" cy="15" r="3" fill="#FFD6E0"/>
+      <circle cx="1050" cy="45" r="3" fill="#FFD6E0"/>
+    </svg>
+  </div>
+
+  <!-- ===================== FEATURED COLLECTIONS ===================== -->
+  <section class="collections" id="collections">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">✦ Curated for you ✦</p>
+        <h2 class="section-title">Featured Collections</h2>
+        <p class="section-desc">Each piece is entirely handmade — chosen gems, shaped by gentle hands, and finished with golden intention.</p>
+      </div>
+
+      <!-- Necklaces -->
+      <div class="collection-category">
+        <h3 class="category-label">
+          <span class="pearl-dot"></span> Necklaces <span class="pearl-dot"></span>
+        </h3>
+        <div class="product-grid" id="necklaceGrid">
+
+          <article class="product-card" data-name="Rose Quartz Pendant" data-price="68">
+            <div class="card-img-wrap">
+              <img src="images/necklace_pearl.png" alt="Rose Quartz Pendant necklace on soft pink silk" loading="lazy" />
+              <div class="card-img-overlay">
+                <button class="quick-add" data-name="Rose Quartz Pendant" data-price="68" id="quickAdd1">Quick Add</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-badges">
+                <span class="badge badge-new">New</span>
+              </div>
+              <h4 class="card-title">Rose Quartz Pendant</h4>
+              <p class="card-desc">Delicate gold chain cradling a blush rose quartz — a talisman for the tender heart.</p>
+              <div class="card-footer">
+                <span class="card-price">$68.00</span>
+                <button class="btn btn-cart" data-name="Rose Quartz Pendant" data-price="68" id="addCart1">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-name="Golden Petal Chain" data-price="84">
+            <div class="card-img-wrap">
+              <img src="images/necklace_floral.png" alt="Golden Petal Chain necklace with floral links" loading="lazy" />
+              <div class="card-img-overlay">
+                <button class="quick-add" data-name="Golden Petal Chain" data-price="84" id="quickAdd2">Quick Add</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-badges">
+                <span class="badge badge-best">Bestseller</span>
+              </div>
+              <h4 class="card-title">Golden Petal Chain</h4>
+              <p class="card-desc">A cascade of tiny handformed petals in warm gold — wear the garden close to your heart.</p>
+              <div class="card-footer">
+                <span class="card-price">$84.00</span>
+                <button class="btn btn-cart" data-name="Golden Petal Chain" data-price="84" id="addCart2">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-name="Moonstone Reverie" data-price="92">
+            <div class="card-img-wrap">
+              <img src="images/necklace_moonstone.png" alt="Moonstone Reverie pendant necklace with iridescent stone" loading="lazy" />
+              <div class="card-img-overlay">
+                <button class="quick-add" data-name="Moonstone Reverie" data-price="92" id="quickAdd3">Quick Add</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-badges">
+                <span class="badge badge-ltd">Limited</span>
+              </div>
+              <h4 class="card-title">Moonstone Reverie</h4>
+              <p class="card-desc">A single moonstone caught in shimmering gold — for the dreamer who glows in the dark.</p>
+              <div class="card-footer">
+                <span class="card-price">$92.00</span>
+                <button class="btn btn-cart" data-name="Moonstone Reverie" data-price="92" id="addCart3">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Pearl divider -->
+      <div class="mini-divider" aria-hidden="true">✦ ·· ✦ ·· ✦</div>
+
+      <!-- Bracelets -->
+      <div class="collection-category">
+        <h3 class="category-label">
+          <span class="pearl-dot"></span> Bracelets <span class="pearl-dot"></span>
+        </h3>
+        <div class="product-grid" id="braceletGrid">
+
+          <article class="product-card" data-name="Pearl Whisper Bracelet" data-price="56">
+            <div class="card-img-wrap">
+              <img src="images/bracelet_pearl.png" alt="Pearl Whisper Bracelet with freshwater pearls" loading="lazy" />
+              <div class="card-img-overlay">
+                <button class="quick-add" data-name="Pearl Whisper Bracelet" data-price="56" id="quickAdd4">Quick Add</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-badges">
+                <span class="badge badge-best">Bestseller</span>
+              </div>
+              <h4 class="card-title">Pearl Whisper Bracelet</h4>
+              <p class="card-desc">Freshwater pearls strung on spun gold thread — quiet luxury for the softest wrists.</p>
+              <div class="card-footer">
+                <span class="card-price">$56.00</span>
+                <button class="btn btn-cart" data-name="Pearl Whisper Bracelet" data-price="56" id="addCart4">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-name="Rose Gold Reverie" data-price="74">
+            <div class="card-img-wrap">
+              <img src="images/bracelet_rose_gold.png" alt="Rose Gold Reverie bangle with crystal charms" loading="lazy" />
+              <div class="card-img-overlay">
+                <button class="quick-add" data-name="Rose Gold Reverie" data-price="74" id="quickAdd5">Quick Add</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-badges">
+                <span class="badge badge-new">New</span>
+              </div>
+              <h4 class="card-title">Rose Gold Reverie</h4>
+              <p class="card-desc">A hammered rose gold bangle graced with crystal drops — delicate armour for the bold soul.</p>
+              <div class="card-footer">
+                <span class="card-price">$74.00</span>
+                <button class="btn btn-cart" data-name="Rose Gold Reverie" data-price="74" id="addCart5">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-name="Charm Garden Bracelet" data-price="62">
+            <div class="card-img-wrap">
+              <img src="images/bracelet_charm.png" alt="Charm Garden Bracelet with floral and heart charms" loading="lazy" />
+              <div class="card-img-overlay">
+                <button class="quick-add" data-name="Charm Garden Bracelet" data-price="62" id="quickAdd6">Quick Add</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-badges"></div>
+              <h4 class="card-title">Charm Garden Bracelet</h4>
+              <p class="card-desc">Tiny hearts and blooms in pink enamel dangle from a fine gold chain — wear your little garden.</p>
+              <div class="card-footer">
+                <span class="card-price">$62.00</span>
+                <button class="btn btn-cart" data-name="Charm Garden Bracelet" data-price="62" id="addCart6">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floral Divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 Q200,5 400,30 Q600,55 800,30 Q1000,5 1200,30" fill="none" stroke="#E8A0B4" stroke-width="1" stroke-dasharray="8 4"/>
+      <text x="580" y="35" font-size="18" fill="#E8A0B4" text-anchor="middle">✿</text>
+      <text x="300" y="20" font-size="12" fill="#FFADC5" text-anchor="middle">✿</text>
+      <text x="900" y="44" font-size="12" fill="#FFADC5" text-anchor="middle">✿</text>
+    </svg>
+  </div>
+
+  <!-- ===================== WHY WE'RE SPECIAL ===================== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">✦ Our Promise ✦</p>
+        <h2 class="section-title">Why Lumière &amp; Lace?</h2>
+        <p class="section-desc">We pour intention into every inch of wire and every chosen gem — because you deserve nothing less.</p>
+      </div>
+      <div class="features-grid">
+
+        <div class="feature-card" id="featureHandcrafted">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 10 C32 10, 24 18, 20 26 C16 34, 18 46, 32 54 C46 46, 48 34, 44 26 C40 18, 32 10, 32 10Z" fill="#FFADC5" opacity="0.4"/>
+              <path d="M32 16 C32 16, 26 22, 23 28 C20 36, 22 44, 32 50 C42 44, 44 36, 41 28 C38 22, 32 16, 32 16Z" stroke="#D4AF87" stroke-width="1.5" fill="none"/>
+              <circle cx="32" cy="32" r="5" fill="#D4AF87"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Handcrafted</h3>
+          <p class="feature-desc">Every single piece is shaped by hand in our studio. No machines, no shortcuts — only devotion, wire, and quiet creativity.</p>
+        </div>
+
+        <div class="feature-card" id="featureEco">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="22" fill="#FFD6E0" opacity="0.5"/>
+              <path d="M32 14 Q40 22, 40 32 Q40 44, 32 50 Q24 44, 24 32 Q24 22, 32 14Z" fill="#E8A0B4" opacity="0.6"/>
+              <path d="M20 36 Q28 30, 32 32 Q36 34, 44 28" stroke="#D4AF87" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <circle cx="32" cy="18" r="3" fill="#D4AF87"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Eco-Friendly Materials</h3>
+          <p class="feature-desc">We source only ethically harvested gems and recycled metals, because beauty should never come at earth's expense.</p>
+        </div>
+
+        <div class="feature-card" id="featurePersonalized">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="14" y="20" width="36" height="26" rx="6" fill="#FFADC5" opacity="0.4"/>
+              <rect x="14" y="20" width="36" height="26" rx="6" stroke="#D4AF87" stroke-width="1.5"/>
+              <path d="M22 33 L28 39 L42 25" stroke="#D4AF87" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M32 14 L32 20" stroke="#E8A0B4" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="32" cy="12" r="3" fill="#E8A0B4"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Personalised Orders</h3>
+          <p class="feature-desc">Every love story is different. Request custom engravings, stone choices, or lengths — we'll create your perfect piece.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Pearl Divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="20" x2="500" y2="20" stroke="#FFD6E0" stroke-width="1"/>
+      <circle cx="510" cy="20" r="4" fill="#FFADC5"/>
+      <circle cx="525" cy="20" r="6" fill="#E8A0B4"/>
+      <circle cx="540" cy="20" r="4" fill="#FFADC5"/>
+      <circle cx="555" cy="20" r="2" fill="#FFD6E0"/>
+      <circle cx="600" cy="20" r="8" fill="#D4AF87" opacity="0.5"/>
+      <circle cx="645" cy="20" r="2" fill="#FFD6E0"/>
+      <circle cx="660" cy="20" r="4" fill="#FFADC5"/>
+      <circle cx="675" cy="20" r="6" fill="#E8A0B4"/>
+      <circle cx="690" cy="20" r="4" fill="#FFADC5"/>
+      <line x1="700" y1="20" x2="1200" y2="20" stroke="#FFD6E0" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">✦ Stories of love ✦</p>
+        <h2 class="section-title">What Our Lovelies Say</h2>
+      </div>
+      <div class="testimonials-grid">
+
+        <article class="testimonial-card" id="testimonial1">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="testimonial-quote">
+            "I wore my Golden Petal Chain to my anniversary dinner and received more compliments than the restaurant décor. It's pure magic — delicate, warm, and so undeniably *me*."
+          </blockquote>
+          <footer class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">S</div>
+            <div>
+              <strong>Sophia R.</strong>
+              <span>Paris, FR</span>
+            </div>
+          </footer>
+        </article>
+
+        <article class="testimonial-card" id="testimonial2">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="testimonial-quote">
+            "I ordered a personalised bracelet for my sister's birthday with her birthstone. The care and detail put into packaging alone made me cry. She sobbed when she opened it."
+          </blockquote>
+          <footer class="testimonial-author">
+            <div class="author-avatar author-avatar--b" aria-hidden="true">L</div>
+            <div>
+              <strong>Layla M.</strong>
+              <span>London, UK</span>
+            </div>
+          </footer>
+        </article>
+
+        <article class="testimonial-card" id="testimonial3">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="testimonial-quote">
+            "The Moonstone Reverie is unlike anything I've ever owned. It catches light in the most ethereal way. I feel like I'm wearing a piece of the night sky. Absolutely worth every cent."
+          </blockquote>
+          <footer class="testimonial-author">
+            <div class="author-avatar author-avatar--c" aria-hidden="true">A</div>
+            <div>
+              <strong>Amélie D.</strong>
+              <span>Montréal, CA</span>
+            </div>
+          </footer>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Floral Divider -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 Q150,60 300,30 Q450,0 600,30 Q750,60 900,30 Q1050,0 1200,30" fill="none" stroke="#FFADC5" stroke-width="1.5" stroke-dasharray="4 6"/>
+      <text x="600" y="35" font-size="16" fill="#E8A0B4" text-anchor="middle">❀</text>
+      <text x="300" y="35" font-size="11" fill="#FFADC5" text-anchor="middle">❀</text>
+      <text x="900" y="35" font-size="11" fill="#FFADC5" text-anchor="middle">❀</text>
+    </svg>
+  </div>
+
+  <!-- ===================== NEWSLETTER ===================== -->
+  <section class="newsletter" id="newsletter">
+    <div class="newsletter-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="newsletter-inner">
+        <p class="section-eyebrow light">✦ Stay in bloom ✦</p>
+        <h2 class="newsletter-title">Love letters from our studio</h2>
+        <p class="newsletter-desc">Be the first to know about new collections, exclusive offers, and the stories behind each piece.</p>
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <div class="form-group">
+            <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email" aria-label="Email address" required />
+            <button type="submit" class="btn btn-primary" id="subscribeBtn">Subscribe</button>
+          </div>
+          <p class="form-note">No spam, ever. Unsubscribe with love at any time. 🌸</p>
+        </form>
+        <div class="form-success" id="formSuccess" style="display:none;">
+          <span>🌸 Welcome to our circle! Check your inbox for a little gift.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#hero" class="logo footer-logo">Lumière <span>&amp;</span> Lace</a>
+          <p class="footer-tagline">Handcrafted beauty — made for the ones who deserve the world.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#features">Our Promise</a></li>
+            <li><a href="#testimonials">Stories</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+          </ul>
+        </nav>
+        <div class="footer-social">
+          <h4>Follow the bloom</h4>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Instagram" id="socialInstagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Pinterest" id="socialPinterest">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.22-5.17 1.22-5.17s-.31-.63-.31-1.56c0-1.46.85-2.55 1.9-2.55.9 0 1.33.67 1.33 1.48 0 .9-.58 2.25-.87 3.5-.25 1.05.52 1.9 1.54 1.9 1.85 0 3.28-1.95 3.28-4.76 0-2.49-1.79-4.23-4.34-4.23-2.96 0-4.69 2.22-4.69 4.51 0 .89.34 1.85.77 2.37.08.1.09.19.07.29-.08.32-.25 1.05-.29 1.19-.04.19-.15.23-.34.14-1.25-.58-2.03-2.42-2.03-3.89 0-3.16 2.3-6.07 6.63-6.07 3.48 0 6.19 2.48 6.19 5.79 0 3.46-2.18 6.24-5.2 6.24-1.02 0-1.97-.53-2.3-1.15l-.62 2.33c-.23.87-.84 1.96-1.25 2.62.94.29 1.94.45 2.97.45 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="TikTok" id="socialTiktok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.89a8.18 8.18 0 0 0 4.77 1.52V6.96a4.84 4.84 0 0 1-1-.27z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Lumière &amp; Lace. All rights reserved. Made with <span class="heart">♥</span> by hand.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Added to basket ✨</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
