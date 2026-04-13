@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Smooth ring follow via rAF
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    cursorRing.style.left = ringX + 'px';
-    cursorRing.style.top  = ringY + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
+  // function animateRing() {
+  //   ringX += (mouseX - ringX) * 0.12;
+  //   ringY += (mouseY - ringY) * 0.12;
+  //   cursorRing.style.left = ringX + 'px';
+  //   cursorRing.style.top  = ringY + 'px';
+  //   requestAnimationFrame(animateRing);
+  // }
+  // animateRing();
 
   // Click: bloom burst + scale
   document.addEventListener('mousedown', (e) => {
