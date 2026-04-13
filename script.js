@@ -5,6 +5,118 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ────────────────────────────────────
+     CUSTOM BLOOM CURSOR 🌸
+  ──────────────────────────────────── */
+  const cursor     = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = -200, mouseY = -200;
+  let ringX  = -200, ringY  = -200;
+  let trailTimer = 0;
+
+  // Petal emojis for trail
+  const PETALS = ['🌸', '🌺', '✿', '❀', '🌷', '💮'];
+
+  // Move cursor instantly, ring lags behind
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top  = mouseY + 'px';
+
+    // Spawn petal trail every ~70ms of movement
+    const now = Date.now();
+    if (now - trailTimer > 70) {
+      trailTimer = now;
+      spawnPetalTrail(mouseX, mouseY);
+    }
+  });
+
+  // Smooth ring follow via rAF
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top  = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Click: bloom burst + scale
+  document.addEventListener('mousedown', (e) => {
+    cursor.classList.add('clicking');
+    cursorRing.classList.add('clicking');
+    spawnClickBloom(e.clientX, e.clientY);
+  });
+
+  document.addEventListener('mouseup', () => {
+    cursor.classList.remove('clicking');
+    cursorRing.classList.remove('clicking');
+  });
+
+  // Hover over interactive elements → grow ring
+  document.querySelectorAll('a, button, input, [role="button"]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursorRing.style.width  = '70px';
+      cursorRing.style.height = '70px';
+      cursorRing.style.borderColor = 'var(--dusty-rose)';
+      cursorRing.style.opacity = '0.65';
+      cursor.style.fontSize = '30px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursorRing.style.width  = '';
+      cursorRing.style.height = '';
+      cursorRing.style.borderColor = '';
+      cursorRing.style.opacity = '';
+      cursor.style.fontSize = '';
+    });
+  });
+
+  // Hide cursor when leaving window
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = '0';
+    cursorRing.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = '1';
+    cursorRing.style.opacity = '';
+  });
+
+  function spawnPetalTrail(x, y) {
+    const petal = document.createElement('div');
+    petal.className = 'petal-trail';
+    petal.textContent = PETALS[Math.floor(Math.random() * PETALS.length)];
+    const tx = (Math.random() - 0.5) * 60;
+    const ty = Math.random() * 40 + 20;
+    const tr = (Math.random() - 0.5) * 180 + 'deg';
+    petal.style.left = x + 'px';
+    petal.style.top  = y + 'px';
+    petal.style.setProperty('--tx', tx + 'px');
+    petal.style.setProperty('--ty', ty + 'px');
+    petal.style.setProperty('--tr', tr);
+    petal.style.fontSize = (10 + Math.random() * 10) + 'px';
+    document.body.appendChild(petal);
+    petal.addEventListener('animationend', () => petal.remove());
+  }
+
+  function spawnClickBloom(x, y) {
+    const burst = document.createElement('div');
+    burst.className = 'click-bloom';
+    burst.textContent = '🌸';
+    burst.style.left = x + 'px';
+    burst.style.top  = y + 'px';
+    document.body.appendChild(burst);
+    burst.addEventListener('animationend', () => burst.remove());
+    // Spawn a mini ring of petals on click
+    for (let i = 0; i < 6; i++) {
+      const angle = (i / 6) * Math.PI * 2;
+      const dist  = 40 + Math.random() * 30;
+      const px = x + Math.cos(angle) * dist;
+      const py = y + Math.sin(angle) * dist;
+      setTimeout(() => spawnPetalTrail(px, py), i * 30);
+    }
+  }
+
+  /* ────────────────────────────────────
      NAVBAR scroll effect
   ──────────────────────────────────── */
   const navbar = document.getElementById('navbar');
@@ -270,6 +382,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     newsletterForm.style.display = 'none';
     formSuccess.style.display = 'block';
+  });
+
+  /* ────────────────────────────────────
+     ANIMATED TAB TITLE 🌸
+  ──────────────────────────────────── */
+  const TAB_TITLES = [
+    '🌸 Onebloom',
+    '✨ Making beauty,',
+    '🧵 one bead',
+    '💛 at a time.',
+    '🌺 Onebloom',
+    '🌸 Handcrafted with love',
+  ];
+  let tabIdx = 0;
+  let tabInterval = null;
+
+  function startTitleCycle() {
+    tabInterval = setInterval(() => {
+      tabIdx = (tabIdx + 1) % TAB_TITLES.length;
+      document.title = TAB_TITLES[tabIdx];
+    }, 1800);
+  }
+
+  function stopTitleCycle() {
+    clearInterval(tabInterval);
+    tabInterval = null;
+  }
+
+  // Start cycling immediately
+  startTitleCycle();
+
+  // When user leaves tab — show "come back" message
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopTitleCycle();
+      document.title = '🌸 Come back! We miss you…';
+    } else {
+      document.title = TAB_TITLES[tabIdx];
+      startTitleCycle();
+    }
   });
 
   /* ────────────────────────────────────
