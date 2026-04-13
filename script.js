@@ -317,11 +317,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       cartCount.classList.add('visible');
       cartFooter.style.display = 'block';
-      cartTotal.textContent = '$' + total.toFixed(2);
+      cartTotal.textContent = 'Rs. ' + total.toLocaleString();
       cartItems.innerHTML = cart.map((item, idx) => `
         <div class="cart-item">
           <span class="cart-item-name">${item.name} × ${item.qty}</span>
-          <span class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</span>
+          <span class="cart-item-price">Rs. ${(item.price * item.qty).toLocaleString()}</span>
           <button class="cart-item-remove" data-idx="${idx}" aria-label="Remove ${item.name}">✕</button>
         </div>
       `).join('');
@@ -366,6 +366,130 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   renderCart();
+
+  /* ────────────────────────────────────
+     CHECKOUT & WHATSAPP LOGIC
+  ──────────────────────────────────── */
+  const checkoutBtn      = document.getElementById('checkoutBtn');
+  const whatsappCartBtn  = document.getElementById('whatsappCartBtn');
+  const whatsappFloat    = document.getElementById('whatsappFloat');
+  
+  const checkoutOverlay  = document.getElementById('checkoutOverlay');
+  const modalClose       = document.getElementById('modalClose');
+  const modalBody        = document.getElementById('modalBody');
+  const modalSuccess     = document.getElementById('modalSuccess');
+  const modalSummary     = document.getElementById('modalSummary');
+  const modalTotal       = document.getElementById('modalTotal');
+  const checkoutForm     = document.getElementById('checkoutForm');
+  const successCloseBtn  = document.getElementById('successCloseBtn');
+  const modalWhatsappBtn = document.getElementById('modalWhatsappBtn');
+
+  // Hardcoded WhatsApp Number
+  const WA_NUMBER = '923000000000'; // Replace with actual number
+
+  function generateWhatsAppMessage(isFromModal = false) {
+    let msg = '🌸 *Hello Onebloom!* I would like to place an order: \n\n';
+    let total = 0;
+    
+    if (cart.length > 0) {
+      cart.forEach(item => {
+        msg += `▪ ${item.name} (x${item.qty}) - Rs. ${(item.price * item.qty).toLocaleString()}\n`;
+        total += item.price * item.qty;
+      });
+      msg += `\n*Order Total: Rs. ${total.toLocaleString()}*\n`;
+    } else {
+      msg = '🌸 *Hello Onebloom!* I have a query about your jewelry.';
+      return encodeURIComponent(msg);
+    }
+
+    if (isFromModal) {
+      const name = document.getElementById('co-name').value;
+      const phone = document.getElementById('co-phone').value;
+      const address = document.getElementById('co-address').value;
+      msg += `\n*Delivery Details:*\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nPayment: Cash on Delivery\n`;
+    }
+
+    return encodeURIComponent(msg);
+  }
+
+  function openWhatsApp(isFromModal = false) {
+    if (isFromModal && !checkoutForm.checkValidity()) {
+      checkoutForm.reportValidity();
+      return;
+    }
+    const msg = generateWhatsAppMessage(isFromModal);
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+    if (isFromModal) {
+      showCheckoutSuccess();
+    }
+  }
+
+  whatsappFloat.addEventListener('click', (e) => {
+    e.preventDefault();
+    openWhatsApp(false);
+  });
+
+  whatsappCartBtn.addEventListener('click', () => {
+    openWhatsApp(false);
+  });
+
+  modalWhatsappBtn.addEventListener('click', () => {
+    openWhatsApp(true);
+  });
+
+  // Open Checkout Modal
+  checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) return;
+    
+    closeCart(); // Close the sidebar cart
+    
+    // Populate summary
+    let summaryHtml = '';
+    let total = 0;
+    cart.forEach(item => {
+      summaryHtml += `<div class="summary-item"><span>${item.name} (x${item.qty})</span><span>Rs. ${(item.price * item.qty).toLocaleString()}</span></div>`;
+      total += item.price * item.qty;
+    });
+    
+    modalSummary.innerHTML = summaryHtml;
+    modalTotal.textContent = 'Total: Rs. ' + total.toLocaleString();
+    
+    // Reset modal state
+    modalBody.style.display = 'block';
+    modalSuccess.style.display = 'none';
+    checkoutForm.reset();
+    
+    // Open modal
+    checkoutOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeCheckout() {
+    checkoutOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeCheckout);
+  checkoutOverlay.addEventListener('click', (e) => {
+    if (e.target === checkoutOverlay) closeCheckout();
+  });
+  successCloseBtn.addEventListener('click', () => {
+    closeCheckout();
+    cart = [];
+    renderCart();
+  });
+
+  function showCheckoutSuccess() {
+    modalBody.style.display = 'none';
+    modalSuccess.style.display = 'flex';
+  }
+
+  // Handle Form Submit (Cash on Delivery)
+  checkoutForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    showCheckoutSuccess();
+    // In a real app, send data to backend here.
+  });
 
   /* ────────────────────────────────────
      NEWSLETTER FORM
