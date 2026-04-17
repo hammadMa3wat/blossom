@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
      CUSTOM BLOOM CURSOR 🌸
   ──────────────────────────────────── */
   const cursor     = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursorRing');
   let mouseX = -200, mouseY = -200;
-  let ringX  = -200, ringY  = -200;
   let trailTimer = 0;
 
   // Petal emojis for trail
@@ -31,42 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Smooth ring follow via rAF
-  // function animateRing() {
-  //   ringX += (mouseX - ringX) * 0.12;
-  //   ringY += (mouseY - ringY) * 0.12;
-  //   cursorRing.style.left = ringX + 'px';
-  //   cursorRing.style.top  = ringY + 'px';
-  //   requestAnimationFrame(animateRing);
-  // }
-  // animateRing();
-
   // Click: bloom burst + scale
   document.addEventListener('mousedown', (e) => {
     cursor.classList.add('clicking');
-    cursorRing.classList.add('clicking');
     spawnClickBloom(e.clientX, e.clientY);
   });
 
   document.addEventListener('mouseup', () => {
     cursor.classList.remove('clicking');
-    cursorRing.classList.remove('clicking');
   });
 
-  // Hover over interactive elements → grow ring
+  // Hover over interactive elements → grow cursor
   document.querySelectorAll('a, button, input, [role="button"]').forEach(el => {
     el.addEventListener('mouseenter', () => {
-      cursorRing.style.width  = '70px';
-      cursorRing.style.height = '70px';
-      cursorRing.style.borderColor = 'var(--dusty-rose)';
-      cursorRing.style.opacity = '0.65';
       cursor.style.fontSize = '30px';
     });
     el.addEventListener('mouseleave', () => {
-      cursorRing.style.width  = '';
-      cursorRing.style.height = '';
-      cursorRing.style.borderColor = '';
-      cursorRing.style.opacity = '';
       cursor.style.fontSize = '';
     });
   });
@@ -74,11 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Hide cursor when leaving window
   document.addEventListener('mouseleave', () => {
     cursor.style.opacity = '0';
-    cursorRing.style.opacity = '0';
   });
   document.addEventListener('mouseenter', () => {
     cursor.style.opacity = '1';
-    cursorRing.style.opacity = '';
   });
 
   function spawnPetalTrail(x, y) {
