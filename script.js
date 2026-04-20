@@ -93,9 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ────────────────────────────────────
-     GLOW BORDER ON CARDS
+     GLOW BORDER ON ALL CARDS
   ──────────────────────────────────── */
-  document.querySelectorAll('.product-card').forEach(card => {
+  document.querySelectorAll('.product-card, .feature-card, .testimonial-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;

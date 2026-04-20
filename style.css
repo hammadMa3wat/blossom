@@ -890,7 +890,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   box-shadow: var(--shadow-soft);
   transition: all var(--transition-base);
   position: relative;
-  overflow: hidden;
 }
 
 .feature-card::before {
@@ -907,10 +906,39 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   pointer-events: none;
 }
 
+.feature-card::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: radial-gradient(
+    circle 250px at var(--mouse-x, -200px) var(--mouse-y, -200px),
+    rgba(255, 173, 197, 0.95),
+    rgba(232, 160, 180, 0.4) 40%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 10;
+}
+
 .feature-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(232, 160, 180, 0.45);
+  box-shadow:
+    var(--shadow-hover),
+    0 0 20px rgba(255, 173, 197, 0.3),
+    0 0 40px rgba(255, 173, 197, 0.1);
+  border-color: transparent;
+}
+
+.feature-card:hover::after {
+  opacity: 1;
 }
 
 .feature-icon {
@@ -979,9 +1007,39 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   pointer-events: none;
 }
 
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: radial-gradient(
+    circle 250px at var(--mouse-x, -200px) var(--mouse-y, -200px),
+    rgba(255, 173, 197, 0.95),
+    rgba(232, 160, 180, 0.4) 40%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 10;
+}
+
 .testimonial-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
+  box-shadow:
+    var(--shadow-hover),
+    0 0 20px rgba(255, 173, 197, 0.3),
+    0 0 40px rgba(255, 173, 197, 0.1);
+  border-color: transparent;
+}
+
+.testimonial-card:hover::after {
+  opacity: 1;
 }
 
 .stars {
