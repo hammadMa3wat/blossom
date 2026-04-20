@@ -121,7 +121,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ── Container ── */
 .container {
-  width: 92%;
+  width: 90%;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -184,10 +184,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: 10px 22px;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-  color: var(--white);
+  background: var(--hot-pink);
+  color: var(--text-dark);
   border-radius: var(--radius-btn);
-  box-shadow: 0 4px 14px rgba(212, 175, 135, 0.4);
+  box-shadow: 0 4px 14px rgba(255, 173, 197, 0.4);
   font-weight: 700;
   text-transform: uppercase;
   transition: all var(--transition-base);
@@ -195,7 +195,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .btn-cart:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(212, 175, 135, 0.5);
+  background: var(--dusty-rose);
+  box-shadow: 0 8px 24px rgba(232, 160, 180, 0.5);
 }
 
 /* ══════════════════════════════════════
@@ -706,10 +707,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-radius: inherit;
 }
 
+.product-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    circle 180px at var(--mouse-x, -200px) var(--mouse-y, -200px),
+    rgba(255, 173, 197, 1),
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+}
+
 .product-card:hover {
   transform: translateY(-10px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(232, 160, 180, 0.55);
+  border-color: transparent;
+}
+
+.product-card:hover::after {
+  opacity: 1;
 }
 
 .card-img-wrap {

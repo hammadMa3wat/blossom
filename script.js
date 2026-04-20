@@ -93,6 +93,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ────────────────────────────────────
+     GLOW BORDER ON CARDS
+  ──────────────────────────────────── */
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  /* ────────────────────────────────────
      NAVBAR scroll effect
   ──────────────────────────────────── */
   const navbar = document.getElementById('navbar');
@@ -334,9 +347,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => toast.classList.remove('show'), 2800);
   }
 
-  // Wire up all "Add to Cart" & "Quick Add" buttons
-  document.querySelectorAll('[data-name][data-price]').forEach(btn => {
-    btn.addEventListener('click', () => {
+  // Wire up all "Add to Cart" & "Quick Add" buttons explicitly
+  document.querySelectorAll('.btn-cart, .quick-add').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent extra events if needed
       addToCart(btn.dataset.name, btn.dataset.price);
     });
   });
